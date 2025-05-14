@@ -17,12 +17,12 @@ CREATE TABLE VENDOR (
 
 -- Table 3: PAYMENT
 CREATE TABLE PAYMENT (
-    S.No INT,
+    Transaction_id INT,
     Amount DECIMAL(10,2),
     Date DATE,
     Roll_number INT,
     Vendor_id INT,
-    PRIMARY KEY (S.No, Vendor_id, Student_RollNo) 
+    PRIMARY KEY (Transaction_id) 
     FOREIGN KEY (Roll_number) REFERENCES STUDENT(Roll_number),
     FOREIGN KEY (Vendor_id) REFERENCES VENDOR(id)
 );

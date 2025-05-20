@@ -272,8 +272,6 @@ INSERT INTO PAYMENT (Transaction_id, Amount, Date, Roll_number, Vendor_id) VALUE
 ('000049', 15000.00, '2024-12-30', '21CSB0B49', 100),
 ('000050', 15000.00, '2024-12-31', '24EEB0A50', 100);
 
-Drop table payment;
-
 INSERT INTO FEEDBACK (Feedback_no, Roll_number, Mess_id, Rating, Comments) VALUES
 (1, '23CSB0B01', 1, 4, 'Good food quality, but could improve variety.'),
 (1, '23EEB0A02', 2, 5, 'Excellent service and hygiene.'),

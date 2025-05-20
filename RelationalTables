@@ -1,6 +1,7 @@
+USE college;
 -- Table 1: STUDENT
 CREATE TABLE STUDENT (
-    Roll_number INT PRIMARY KEY,
+    Roll_number VARCHAR(20) PRIMARY KEY,
     Name VARCHAR(50),
     Contact_no_1 VARCHAR(15),
     Contact_no_2 VARCHAR(15),
@@ -19,10 +20,10 @@ CREATE TABLE VENDOR (
 
 -- Table 3: PAYMENT
 CREATE TABLE PAYMENT (
-    Transaction_id INT,
+    Transaction_id VARCHAR(20),
     Amount DECIMAL(10,2),
     Date DATE,
-    Roll_number INT,
+    Roll_number VARCHAR(20),
     Vendor_id INT,
     PRIMARY KEY (Transaction_id),
     FOREIGN KEY (Roll_number) REFERENCES STUDENT(Roll_number),
@@ -38,13 +39,15 @@ CREATE TABLE MESS (
     City VARCHAR(50),
     State VARCHAR(50),
     IssueDate DATE,
-    DueDate DATE
+    DueDate DATE,
+    Vendor_id INT,
+    FOREIGN KEY (Vendor_id) REFERENCES Vendor(id)
 );
 
 -- Table 5: FEEDBACK (Weak entity)
 CREATE TABLE FEEDBACK (
     Feedback_no INT,
-    Roll_number INT,
+    Roll_number VARCHAR(20),
     Mess_id INT,
     Rating INT,
     Comments TEXT,
@@ -55,7 +58,7 @@ CREATE TABLE FEEDBACK (
 
 -- Table 6: REPRESENTATIVES
 CREATE TABLE REPRESENTATIVES (
-    Roll_no INT PRIMARY KEY,
+    Roll_no VARCHAR(20) PRIMARY KEY,
     Name VARCHAR(50),
     Role VARCHAR(30),
     Mess_id INT,
@@ -64,7 +67,7 @@ CREATE TABLE REPRESENTATIVES (
 
 -- Table 7: WARDEN
 CREATE TABLE WARDEN (
-    Prof_id INT PRIMARY KEY,
+    Prof_id VARCHAR(20) PRIMARY KEY,
     Name VARCHAR(50),
     Contact_no_1 VARCHAR(15),
     Contact_no_2 VARCHAR(15),

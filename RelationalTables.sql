@@ -1,4 +1,3 @@
-USE college;
 -- Table 1: STUDENT
 CREATE TABLE STUDENT (
     Roll_number VARCHAR(20) PRIMARY KEY,

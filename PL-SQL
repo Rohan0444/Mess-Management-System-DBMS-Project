@@ -1,0 +1,73 @@
+1. FUNCTION for No. of students in a mess
+CREATE FUNCTION count_students_in_mess(mid INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE total INT;
+    SELECT COUNT(*) INTO total
+    FROM STUDENT
+    WHERE Mess_id = mid;
+    RETURN total;
+END;
+//
+
+
+2. Procedure: Add Daily Menu Item
+CREATE PROCEDURE AddDailyMenuItem (
+    IN messid INT,
+    IN day_name VARCHAR(10),
+    IN itemid INT,
+    IN dish VARCHAR(50),
+    IN category VARCHAR(30),
+    IN mealtype VARCHAR(30)
+)
+BEGIN
+    INSERT INTO DAILY_MENU (Mess_id, Day, ItemId, DishName, Category, MealType)
+    VALUES (messid, day_name, itemid, dish, category, mealtype);
+END;
+//
+
+
+3. Trigger: Ensure ratings are within valid range
+CREATE TRIGGER check_rating_before_insert
+BEFORE INSERT ON FEEDBACK
+FOR EACH ROW
+BEGIN
+    IF NEW.Rating < 1 OR NEW.Rating > 5 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Rating must be between 1 and 5';
+    END IF;
+END;
+//
+
+
+4. Procedure: Get best-rated mess
+CREATE PROCEDURE GetBestRatedMess()
+BEGIN
+    SELECT M.id, M.Name, ROUND(AVG(F.Rating), 2) AS Avg_Rating
+    FROM MESS M
+    JOIN FEEDBACK F ON M.id = F.Mess_id
+    GROUP BY M.id, M.Name
+    HAVING Avg_Rating = (
+        SELECT MAX(avg_rating)
+        FROM (
+            SELECT AVG(Rating) AS avg_rating
+            FROM FEEDBACK
+            GROUP BY Mess_id
+        ) AS subquery
+    );
+END;
+//
+ -- {To use:  CALL GetBestRatedMess();  }
+
+5. Trigger: Prevent inserting workers without rule
+CREATE TRIGGER check_worker_role
+BEFORE INSERT ON WORKERS
+FOR EACH ROW
+BEGIN
+    IF NEW.Role IS NULL OR TRIM(NEW.Role) = '' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Worker role cannot be empty.';
+    END IF;
+END;
+//

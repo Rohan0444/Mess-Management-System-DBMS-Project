@@ -4,8 +4,8 @@ A relational database designed to manage **Mess Payments**, **Menu Details**, an
 
 It is a **group project** completed collaboratively by:
 
-- [Jeevesh Mittal](https://github.com/JeeveshMittal?tab=repositories)
 - [Rohan Rawat](https://github.com/Rohan0444)
+- [Jeevesh Mittal](https://github.com/JeeveshMittal?tab=repositories)
 
 We both contributed equally to all major aspects of the project, including planning, development, and testing.
 
